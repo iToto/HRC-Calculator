@@ -1,0 +1,53 @@
+
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      a.brand(href="#")= title
+      .nav-collapse
+        ul.nav
+          li.active
+            a(href="#") Home
+          li
+            a(href="#calculator") Calculator
+          li
+            a(href="#contact") Contact
+.container
+  .row
+    .span8
+      p.lead High Rupture Capacity Calculator
+      p The breaking capacity is the maximum current that can safely be interrupted by the fuse. Generally, this should be higher than the prospective short circuit current. Miniature fuses may have an interrupting rating only 10 times their rated current. Some fuses are designated High Rupture Capacity (HRC) and are usually filled with sand or a similar material. Fuses for small, low-voltage, usually residential, wiring systems are commonly rated, in North American practice, to interrupt 10,000 amperes. Fuses for larger power systems must have higher interrupting ratings, with some low-voltage current-limiting high interrupting fuses rated for 300,000 amperes. Fuses for high-voltage equipment, up to 115,000 volts, are rated by the total apparent power (megavolt-amperes, MVA) of the fault level on the circuit.
+
+  section#calculator
+  .hero-unit
+    h1 Calculator:
+    .row
+      .span12
+        p All fields are mandatory
+        form(id="calculate", method="POST", action="/calculate").form-horizontal
+          fieldset
+            .control-group
+              label(class="control-label", for="eclairage") Eclairage:
+              .controls
+                input(id="eclairage", type="text", placeholder="14 kVA")
+            .control-group
+              label(class="control-label", for="service") Service:
+              .controls
+                input(id="service", type="text", placeholder="2.0 kVA")
+            .control-group
+              label(class="control-label", for="chargesFuture") Charges Future:
+              .controls
+                input(id="control-label", type="text", placeholder="10.0 kVA")
+            .control-group
+              label(class="control-label", for="total") Total:
+              .controls
+                input(id="total", type="text", placeholder="26.0 kVA")
+            .control-group
+              .controls
+                button(type="submit",class="btn") Calculate
+
+
+
+
+  section#contact
+  p.lead Is this calculator not working properly?
+  a( class='btn btn-primary btn-large',href='mailto:toto19@gmail.com') Let us know
