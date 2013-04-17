@@ -32,19 +32,27 @@
             .control-group
               label(class="control-label", for="eclairage") Eclairage:
               .controls
-                input(id="eclairage", type="text", placeholder="14 kVA")
+                .input-append
+                  input(id="eclairage", type="text", placeholder="14")
+                  span.add-on kVA
             .control-group
               label(class="control-label", for="service") Service:
               .controls
-                input(id="service", type="text", placeholder="2.0 kVA")
+                .input-append
+                  input(id="service", type="text", placeholder="2.0")
+                  span.add-on kVA
             .control-group
               label(class="control-label", for="chargesFuture") Charges Future:
               .controls
-                input(id="chargesFuture", type="text", placeholder="10.0 kVA")
+                .input-append
+                  input(id="chargesFuture", type="text", placeholder="10.0")
+                  span.add-on kVA
             .control-group
               label(class="control-label", for="total") Total:
               .controls
-                input(id="total", type="text", placeholder="26.0 kVA")
+                .input-append
+                  span.input-large.uneditable-input#total
+                  span.add-on kVA
             .control-group
               .controls
                 button(class="btn",id="button",type="submit") Calculate
@@ -54,8 +62,7 @@
           .span12
             .input-append
               span.input-xlarge.uneditable-input#update Result
-              //- input(class="span2 input-medium uneditable-input",id="result",type="text", placeholder="Result")
-              span.add-on kVA
+              span.add-on A
 
   section#contact
   p.lead Is this calculator not working properly?
@@ -67,17 +74,15 @@
           var eclairage     = $("#eclairage").val();
           var service       = $("#service").val();
           var chargesFuture = $("#chargesFuture").val();
-          var total         = $("#total").val();
+          var total         = Number(eclairage) + Number(service) + Number(chargesFuture);
+
+          $("#total").text(total);
 
           var request = $.ajax({
             type: 'POST',
             async: false,
             url: '/calculate',
-            data: { eclairage: eclairage,
-                    service: service,
-                    chargesFuture: chargesFuture,
-                    total: total
-            }
+            data: { total: total }
           });
           request.done(function(msg) {
             $("#update").text(msg);
