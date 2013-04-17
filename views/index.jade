@@ -27,7 +27,7 @@
       .span6
         h2 Calculator:
         p.lead All fields are mandatory
-        form(id="calculate", method="POST", action="/calculate").form-horizontal
+        .form-horizontal
           fieldset
             .control-group
               label(class="control-label", for="eclairage") Eclairage:
@@ -40,21 +40,51 @@
             .control-group
               label(class="control-label", for="chargesFuture") Charges Future:
               .controls
-                input(id="control-label", type="text", placeholder="10.0 kVA")
+                input(id="chargesFuture", type="text", placeholder="10.0 kVA")
             .control-group
               label(class="control-label", for="total") Total:
               .controls
                 input(id="total", type="text", placeholder="26.0 kVA")
             .control-group
               .controls
-                button(type="submit",class="btn btn-primary") Calculate
+                button(class="btn",id="button",type="submit") Calculate
       .span4
         h2 Result:
-
-
-
-
+        .row
+          .span12
+            .input-append
+              span.input-xlarge.uneditable-input#update Result
+              //- input(class="span2 input-medium uneditable-input",id="result",type="text", placeholder="Result")
+              span.add-on kVA
 
   section#contact
   p.lead Is this calculator not working properly?
   a( class='btn btn-primary btn-large',href='mailto:toto19@gmail.com') Let us know
+
+  script(type='text/javascript')
+    $("#button").click( function()
+       {
+          var eclairage     = $("#eclairage").val();
+          var service       = $("#service").val();
+          var chargesFuture = $("#chargesFuture").val();
+          var total         = $("#total").val();
+
+          var request = $.ajax({
+            type: 'POST',
+            async: false,
+            url: '/calculate',
+            data: { eclairage: eclairage,
+                    service: service,
+                    chargesFuture: chargesFuture,
+                    total: total
+            }
+          });
+          request.done(function(msg) {
+            $("#update").text(msg);
+          });
+
+          request.fail(function(jqXHR, textStatus) {
+            alert( "Request failed: " + textStatus );
+          });
+       }
+    );
